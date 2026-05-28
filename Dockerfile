@@ -15,14 +15,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy the dependency manifest into the working directory container
-COPY requirements.txt
+COPY requirements.txt .
 
 # Upgrade pip and execute dependency installation via the cached layout
 RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
 
 # Copy the core Python application script into the workspace container
-COPY main.py
+COPY main.py .
 
 # Explicitly expose port 8080 to match Cloud Run inbound traffic maps
 EXPOSE 8080
